@@ -14,6 +14,14 @@
     .page-footer-top-inner{
         width: 768px;
     }
+    .product-grid-row{
+        width: 768px;
+    }
+    .pl-outer-space{
+        position: relative;
+        height: 840.75px;
+        opacity: 1;
+    }
 }
 
 @media only screen and (max-width: 1200px) {
@@ -25,6 +33,9 @@
     }
     .page-footer-top-inner{
         width: 950px;
+    }
+    .product-grid-row{
+        width:950px;
     }
 }
 

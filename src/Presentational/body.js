@@ -1,5 +1,6 @@
 import React from 'react'
 import {ParallaxProvider} from "react-scroll-parallax";
+import {ProductsDisplayContainer} from "../Container/productsDisplayContainer";
 
 export const Body=(props)=>{
    return (
@@ -22,6 +23,7 @@ export const Body=(props)=>{
                                                </div>
                                            </div>
                                    </div>
+                                   <ProductsDisplayContainer/>
                                </div>
                        </div>
                    </div>
