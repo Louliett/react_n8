@@ -155,3 +155,18 @@
     width: 100%;
     max-width: 100%;
 }
+.add-to-cart-icon-wrapper:hover, .view-product-small:hover, .add-to-wishlist:hover{
+    cursor: pointer;
+    background-color: #211f1f;
+    -webkit-transition: color .2s ease-in-out,background-color .2s ease-in-out;
+    -moz-transition: color .2s ease-in-out,background-color .2s ease-in-out;
+    transition: color .2s ease-in-out,background-color .2s ease-in-out;
+
+}
+.add-to-cart-icon-wrapper:hover > svg, .view-product-small:hover > svg, .add-to-wishlist:hover > svg{
+    fill: #ffffff;
+    -webkit-transition: color .2s ease-in-out,fill .2s ease-in-out;
+    -moz-transition: color .2s ease-in-out,fill .2s ease-in-out;
+    transition: color .2s ease-in-out,fill .2s ease-in-out;
+
+}

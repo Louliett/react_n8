@@ -1,5 +1,6 @@
 import React from 'react'
 import {ItemContainer} from "../Container/itemContainer";
+import Ripples from 'react-ripples'
 
 export const ProductsDisplay=(props)=>{
     var itemsContainer=[]
@@ -23,6 +24,11 @@ export const ProductsDisplay=(props)=>{
                                                         <div className='pl-sizer'></div>
                                                         <div className='pl-gutter'></div>
                                                         {itemsContainer}
+                                                        <div className='empty-space'></div>
+                                                            <a className='view-all-button'>
+                                                                <span className='button-text'>View All
+                                                                </span>
+                                                            </a>
                                                     </div>
 
                                                 </div>

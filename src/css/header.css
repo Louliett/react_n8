@@ -313,6 +313,8 @@ a, p a {
     display: inline-block;
     vertical-align: middle;
     text-align: center;
+    height:100%;
+
 }
 
 .mobile-right-inner {
@@ -412,6 +414,18 @@ a, p a {
     text-transform: uppercase;
     border-bottom: 1px solid #ededed;
     cursor: pointer;
+}
+.mobile-logo-holder{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.cart-holder-inner-wrapper{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }
 
 /*dropdown menu*/
