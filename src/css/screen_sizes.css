@@ -86,4 +86,20 @@
     .item-space{
         width:50%;
     }
+    .post-image-image{
+        height:446.35px;
+    }
+}
+@media only screen and (min-width:1400px) {
+    .product-grid-row, .grid {
+        width:1300px
+    }
+    .footer-inner,
+    .wrapper-inner {
+        width:1350px
+    }
+    .page-header .fixed-wrapper.fixed{
+        width:1350px;
+        left:auto
+    }
 }

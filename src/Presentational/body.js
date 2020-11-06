@@ -2,7 +2,8 @@ import React from 'react'
 import {ParallaxProvider} from "react-scroll-parallax";
 import {ProductsDisplayContainer} from "../Container/productsDisplayContainer";
 import {BannerContainer} from "../Container/bannerContainer";
-import {TwoDivsContainer} from "../Container/twoDivsContainer";
+import {SeveralDivsContainer} from "../Container/severalDivsContainer";
+import {ExtraDivContainer} from "../Container/extraDivContainer";
 
 export const Body=(props)=>{
    return (
@@ -15,7 +16,8 @@ export const Body=(props)=>{
                                <div className='grid-col-12 content-holder'>
                                    <BannerContainer/>
                                    <ProductsDisplayContainer/>
-                                   <TwoDivsContainer/>
+                                   <SeveralDivsContainer/>
+                                   <ExtraDivContainer/>
                                </div>
                        </div>
                    </div>
