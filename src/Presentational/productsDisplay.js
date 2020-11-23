@@ -3,10 +3,6 @@ import {ItemContainer} from "../Container/itemContainer";
 import Ripples from 'react-ripples'
 
 export const ProductsDisplay=(props)=>{
-    var itemsContainer=[]
-
-    if(props.items.length>0){
-    itemsContainer=props.items.map(item=><ItemContainer title={item.title} price={item.price} src={item.src} position={props.position}/>)}
 
     return (
         <div className='products-content-warpper'>
@@ -23,10 +19,10 @@ export const ProductsDisplay=(props)=>{
                                                     <div className='pl-outer-space'>
                                                         <div className='pl-sizer'></div>
                                                         <div className='pl-gutter'></div>
-                                                        {itemsContainer}
+                                                        {props.items}
                                                         <div className='empty-space'></div>
-                                                            <a className='view-all-button'>
-                                                                <span className='button-text'>View All
+                                                            <a className='view-all-button' onClick={props.handleClick} href={props.href}>
+                                                                <span className='button-text'>{props.buttonText}
                                                                 </span>
                                                             </a>
                                                     </div>

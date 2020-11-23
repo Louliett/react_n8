@@ -17,9 +17,9 @@ export const Item=(props)=>{
                 <div className='main-info'>
                     <h4 className='main-info-title'><a href='#'>{props.title}</a></h4>
                     <div className='item-price'>
-                        <span class='amount'>
+                        <span className='amount'>
                             {props.price}
-                            <span className='currency'> .лв</span>
+                            <span className='currency'> лв.</span>
                         </span>
                     </div>
 

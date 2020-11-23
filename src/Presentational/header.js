@@ -1,6 +1,8 @@
 import React from 'react'
 import { CategoriesContainer } from '../Container/categoriesContainer'
 import { UserMenu } from './userMenu'
+import {SearchPopUpContainer} from "../Container/searchPopUpContainer";
+import {Loading} from "./loading";
 
 
 
@@ -17,11 +19,12 @@ export function Header(props){
               </div>
               <div className='right'>
                   <div className='right-inner'>
-                    <UserMenu/>
+                    <UserMenu handleSearchClick={props.handleSearchClick}/>
                   </div>
               </div>
           </div>
       </div>
+            <SearchPopUpContainer showSearch={props.showSearch}/>
         </header>
     );
 }

@@ -9,7 +9,7 @@
     width: 100%;
     vertical-align: middle;
     box-sizing: border-box;
-    border-bottom: 1px solid #959494;
+    border-bottom: 1px solid #f1f1f1;
 }
 
 .page-header {
@@ -141,6 +141,7 @@ a, p a {
     line-height: 1;
     margin: 0 11px;
     margin: 0 20px 0 26px;
+    cursor:pointer;
 }
 
 .wishlist {
@@ -255,12 +256,6 @@ a, p a {
     position: relative;
     z-index: 2;
     height: 100%;
-}
-
-.grid {
-    height: 100%;
-    width: 768px;
-    margin: 0 auto;
 }
 
 .header-mobile-vertical {

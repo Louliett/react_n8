@@ -14,7 +14,7 @@ export function Categories(props){
     return (
         <div style={{height:"inherit"}}>
             <div className='logo-holder'>
-                <a style={{height:21}} href='#'><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="58px" height="58px" viewBox="0 0 31 31" style={{enableBackground:"new 0 0 31 31"}} xmlSpace="preserve">
+                <a style={{height:21}} href='http://localhost:3000/'><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="58px" height="58px" viewBox="0 0 31 31" style={{enableBackground:"new 0 0 31 31"}} xmlSpace="preserve">
                     <g>
                         <path d="M19.5,14.5c0.3,0,0.6-0.1,0.8-0.3c0.2-0.2,0.3-0.5,0.3-0.9v-0.5c0-0.4-0.1-0.7-0.3-0.9c-0.2-0.2-0.5-0.3-0.8-0.3
 		c-0.3,0-0.6,0.1-0.8,0.3c-0.2,0.2-0.3,0.5-0.3,0.9v0.5c0,0.4,0.1,0.7,0.3,0.9C18.9,14.3,19.2,14.5,19.5,14.5z"></path>
