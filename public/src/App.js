@@ -1,14 +1,12 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './app.css';
 import { ErrorContainer } from './common/ErrorContainer';
 import { Admin } from './admin/AdminRouter';
 import { Client } from './client/ClientRouter';
 
-function App() {
+export function App() {
   
-
-
   return (
       <Switch>
         <Route path='/admin' component={Admin} />
@@ -18,4 +16,3 @@ function App() {
   );
 }
 
-export default App;

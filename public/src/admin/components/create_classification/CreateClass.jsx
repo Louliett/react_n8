@@ -1,14 +1,13 @@
 import React from 'react';
+import './create-class.css';
 import { HeaderContainer } from '../header/HeaderContainer';
-import './home.css';
 
-
-export function Home(props) {
+export function CreateClass() {
 
     return (
-        <div className="home">
+        <div className="create_class">
             <HeaderContainer />
-            <h1>welcome to admin!</h1>
+            <h1>Create Classification</h1>
         </div>
     );
 }

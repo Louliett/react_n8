@@ -7,8 +7,6 @@ const host = process.env.PRODUCTDB_HOST;
 const user = process.env.PRODUCTDB_USER;
 const password = process.env.PRODUCTDB_PASS;
 const database = process.env.PRODUCTDB_DB;
-
-console.log('host ', host);
 const connection = mysql.createConnection({
   host: host,
   user: user,

@@ -1,14 +1,13 @@
 import React from 'react';
+import './classifications.css';
 import { HeaderContainer } from '../header/HeaderContainer';
-import './home.css';
 
-
-export function Home(props) {
+export function Classifications() {
 
     return (
-        <div className="home">
+        <div className="classifications">
             <HeaderContainer />
-            <h1>welcome to admin!</h1>
+            <h1>classifications</h1>
         </div>
     );
 }

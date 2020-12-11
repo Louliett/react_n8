@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { ResetPassword } from './ResetPassword';
 import { validatePassword, passwordsMatch } from '../../services/validation.service';
 import { resetPassword } from '../../services/pass.service';

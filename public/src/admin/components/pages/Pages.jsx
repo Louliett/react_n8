@@ -1,14 +1,13 @@
 import React from 'react';
+import './pages.css';
 import { HeaderContainer } from '../header/HeaderContainer';
-import './home.css';
 
-
-export function Home(props) {
+export function Pages() {
 
     return (
-        <div className="home">
+        <div className="pages">
             <HeaderContainer />
-            <h1>welcome to admin!</h1>
+            <h1>Pages</h1>
         </div>
     );
 }

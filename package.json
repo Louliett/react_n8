@@ -33,6 +33,7 @@
     "multer": "^1.4.2",
     "mysql": "^2.18.1",
     "nodemailer": "^6.4.14",
+    "semantic-ui-css": "^2.4.1",
     "stripe": "^8.119.0"
   }
 }

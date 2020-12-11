@@ -17,7 +17,6 @@ export function ForgotPasswordContainer() {
     useEffect(() => {
         console.log(access, 'access');
         if (access) {
-            console.log(message, 'the message');
             setActiveComponent(<EmailSentContainer message={message} />);
           }
     }, [access]);

@@ -1,14 +1,13 @@
 import React from 'react';
+import './create-product.css';
 import { HeaderContainer } from '../header/HeaderContainer';
-import './home.css';
 
-
-export function Home(props) {
+export function CreateProduct() {
 
     return (
-        <div className="home">
+        <div className="create_product">
             <HeaderContainer />
-            <h1>welcome to admin!</h1>
+            <h1>Create Product</h1>
         </div>
     );
 }
