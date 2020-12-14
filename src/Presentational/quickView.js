@@ -1,8 +1,10 @@
 import React from "react";
+import {Image} from "./image";
+import {Loading} from "./loading";
 
 
 export const QuickView = (props) => {
-    console.log(props, 'we end')
+    console.log(props,'quick-view should not run')
     const selectClass=()=>{
         if(props.showView){
             return 'quick-view '+props.properties.open
@@ -10,11 +12,15 @@ export const QuickView = (props) => {
             return 'quick-view'
         }
     }
-    const smallImages=props.properties.srcSmall.map(image => (<div className='product-image-small'>
-        <a onClick={props.switchImage} className='product-image-link'>
-            <img className='actual-product-image-small' src={image} alt={props.title}/>
-        </a>
+   // console.log('props: ', props, 'srcColors: ', props.properties.srcColors, 'selectedColor:',props.selectedColor)
+   // console.log(props.properties.srcColors.find(x => x.color==props.selectedColor),'help', props.options)
+    let smallImagesNew=<Loading/>
+
+    try{
+    smallImagesNew=props.images.srcColors.find(x => x.color==props.selectedColor).images.map((imageObject,index) => (<div key={index} className='product-image-small'>
+        <Image switchImage={props.switchImage} src={imageObject} alt={imageObject} key={index}/>
     </div>))
+    }catch(e){console.log(e,'quickView')}
     
     return (
             <div className={selectClass()}>
@@ -31,13 +37,14 @@ export const QuickView = (props) => {
                                         <figure className='gallery-wrapper'>
                                             <div className='gallery-image-main'>
                                                 <a className='image-redirect'>
-                                                    <img className='actual-product-image' src={props.properties.src} alt='image'/>
+                                                    <img className='actual-product-image' src={props.images.src} alt='image'/>
                                                 </a>
-                                                <img className='actual-product-image-zoomed' onMouseOver={props.handleHoverEnter} onMouseLeave={props.handleHoverExit} onMouseMove={props.handleHover} src={props.properties.src}/>
+                                                <img className='actual-product-image-zoomed' onMouseOver={props.handleHoverEnter} onMouseLeave={props.handleHoverExit} onMouseMove={props.handleHover} src={props.images.src}/>
 
 
                                             </div>
-                                            {smallImages}
+                                            {/*smallImages*/}
+                                            {smallImagesNew}
 
                                         </figure>
                                     </div>
@@ -52,6 +59,10 @@ export const QuickView = (props) => {
 
 
                                             <div className="cart">
+                                                <div className='options-container'>
+                                                    {props.colorSelect}
+                                                    {props.materialSelect}
+                                                </div>
 
                                                 <div className="quantity-buttons">
                                                     <label className="screen-reader-text"
@@ -60,56 +71,14 @@ export const QuickView = (props) => {
                                                     <span onClick={props.handleQuantityMinus} className="quantity-minus">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
                                                     </span>
-                                                    <input type="text" id="quantity_id"
-                                                           className="input-text text"
-                                                           data-step="1" data-min="1" data-max="" name="quantity"
-                                                           value={props.quantity}
-                                                           title="Qty" size="4" pattern="[0-9]*" inputMode="numeric"/>
+                                                    <span id="quantity_id" className="input-text text">
+                                                        {props.quantity}
+                                                    </span>
                                                     <span onClick={props.handleQuantityPlus} className="quantity-plus">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
                                                     </span>
-                                                    {/* Maybe make this into a component */}
-                                                    <table className='variations' cellSpacing='0'>
-                                                        <tbody>
-                                                        <tr>
-                                                            <td className='label'>
-                                                                <label htmlFor="product_colors">Colors</label>
-
-                                                            </td>
-                                                            <td className='value'>
-                                                                <form className='ordering' method='get'>
-                                                                    <select name="orderby" className="orderby hidden-accessible"
-                                                                            aria-label="Shop order" tabIndex="-1" aria-hidden="true">
-                                                                        <option value="menu_order" selected="selected">Default sorting</option>
-                                                                    </select>
-                                                                    <span className='select-container'>
-                                            <span className='select'>
-                                                <span onClick={props.handleSelectClick} className='select-selection role="combobox" aria-haspopup="true" aria-expanded=$({props.expanded}) tabindex="0" aria-labelledby="select-selection-container"'>
-                                                    <span id='select-selection-container' className='select-selection-container' style={{color:props.iconFill}}>{props.colorSorting}</span>
-                                                    <span className='select-selection-arrow'>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill={props.iconFill} width="24px" height="24px">
-                                                            <path d="M0 0h24v24H0V0z" fill="none"/>
-                                                            <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
-                                                        </svg>
-                                                    </span>
-
-                                                </span>
-
-                                            </span>
-                                            <span className='dropdown-wrapper' aria-hidden='true'>
-
-                                            </span>
-
-                                        </span>
-
-                                                                </form>
-
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-
-                                                    </table>
                                                 </div>
+
 
                                                 <button type="submit" name="add-to-cart" value="1128"
                                                         className="single_add_to_cart_button button alt">Add to cart
@@ -145,7 +114,7 @@ export const QuickView = (props) => {
 
                                             <div className='clear'></div>
                                             <a className='view-more-button'>
-                                                <span className='view-more-text'>View full details</span>
+                                                <span onClick={props.handleViewFullClick} className='view-more-text'>View full details</span>
                                             </a>
 
                                         </div>

@@ -4,7 +4,6 @@ import {SortingContainer} from "./sortingContainer";
 import {Loading} from "../Presentational/loading";
 import {decode, encode} from "js-base64";
 import {FullView} from "../Presentational/fullView";
-import {store} from "../reducer/reducers";
 const queryString = require('query-string');
 let cookie = require('cookie');
 
@@ -12,58 +11,46 @@ let cookie = require('cookie');
 
 
 export const QuickViewContainer=(props)=>{
-    const properties = store.getState().selectedProduct
-    console.log('rerender quickViewContainer', props)   /*
+    console.log('recreated?')
+    const [showView, setShowView]=useState(false)
+    const [properties, setProperties] =useState(props.properties)
     const [quantity, setQuantity] = useState(1)
+    const [options, setOptions] = useState([['none'],['none']])
+    const [selectComponents, setSelectComponents]=useState([<Loading/>,<Loading/>])
     const [selectedColor, setSelectedColor]=useState('none')
-
+    const [title, setTitle]=useState('none')
     //for full view
-    */
-    //const quantity=0
-    let selectedColor='none'
-    //let images={src: 'http://localhost:3000/images/loader_backinout.gif', srcColors: [{color: 'none', images:['http://localhost:3000/images/loader_backinout.gif']}]}
-    //const setQuantity=()=>{}
-    const setSelectedColor=()=>{}
-    //const setImages=()=>{}
     const parsed = queryString.parse(document.location.search);
 
 
-    let selectComponents=[<Loading/>,<Loading/>]
-    //let firstColor = selectedColor
-    //let firstSrc = properties.srcColors[0].images[0]
-    let options=[properties.colors,properties.materials]
 
+        useEffect(()=>{
+            },[parsed])
 
-    if(props.type==='full-view'){
-        if(parsed.info != undefined) {
-            let info=sessionStorage.getItem(parsed.info);
-            info=decode(info)
-            info=JSON.parse(info)
-            store.dispatch({type:'LOAD_PRODUCT', payload:info})
+    useEffect(() => {
+        console.log('rerendered')
+        if(props.type==='quick-view') {
 
-        }
-    }
-    options=([properties.colors, properties.materials])
-    const [images, setImages]=useState({src:properties.src, srcColors: properties.srcColors})
-    const [quantity, setQuantity]=useState(0)
-    const [title, setTitle]=useState(properties.title)
-    const [showView, setShowView]=useState(false)
+                    setShowView(props.properties.open)
+                if (title != props.properties.title) {
+                    setProperties(props.properties)
+                    setOptions([props.properties.colors, props.properties.materials])
+                    setSelectedColor(props.properties.colors[0])
+                    setTitle(props.properties.title)
+                }
+        }else if(props.type==='full-view') {
 
-    /*useEffect(()=>{
-     setSelectedColor(options[0][0])
-     setImages({src:infoFull.src, srcColors: infoFull.srcColors})
-
-    },[])
-*/
-    useEffect(()=>{
-        if(props.type==='quick-view'){
-            setShowView(properties.open)
-        }
-    },[props.type])
-    useEffect(()=>{console.log(showView)},[showView])
-
-
-
+                    if(parsed.info != undefined) {
+                        let info=sessionStorage.getItem(parsed.info);
+                        info=decode(info)
+                        info=JSON.parse(info)
+                        setOptions([info.colors, info.materials])
+                        setSelectedColor(info.colors[0])
+                        setTitle(info.title)
+                        setProperties(info)
+                    }
+                }
+            },[title])
 
 
     const handleCloseClick=()=>{
@@ -87,11 +74,9 @@ export const QuickViewContainer=(props)=>{
 
     }
     const switchImage=(e)=>{
-        //fix this we need to pass correct src to srcColors
-        const clickedSrc=e.target.getAttribute('src')
-        let srcsmall=images.srcColors.find(x=>x.color===selectedColor).images
-        srcsmall[srcsmall.indexOf(clickedSrc)]=images.src
-        setImages({src: clickedSrc, srcColors:images.srcColors})
+            let srcsmall=[...properties.srcColors.find(x=>x.color===selectedColor).images]
+            srcsmall[srcsmall.indexOf(e.target.getAttribute('src'))]=properties.src
+            setProperties({...properties, src: e.target.getAttribute('src'), srcColor: [...srcsmall]})
     }
 
     const handleQuantityPlus=()=>{
@@ -101,12 +86,13 @@ export const QuickViewContainer=(props)=>{
         setQuantity(quantity-1)
 
     }
+    const handleSortingColorClick=(e)=>{
+            ColorSelect(e.target.dataset.type, props.properties.srcColors.find(x => x.color === e.target.dataset.type).images[0])
 
+    }
     const handleSortingMaterialClick=()=>{
 
     }
-
-
     const handleViewFullClick=()=>{
         let jsonObj={...properties}
         jsonObj=JSON.stringify(jsonObj)
@@ -115,31 +101,35 @@ export const QuickViewContainer=(props)=>{
         window.location.href='http://localhost:3000/product?info='+properties.id
 
     }
-    const handleSortingColorClick=(e)=>{
-        ColorSelect(e.target.dataset.type, images.srcColors.find(x => x.color === e.target.dataset.type).images[0])
+    useEffect(()=>{
+            let firstColor = options[0][0]
+            let firstSrc = props.properties.srcColors[0].images[0]
+            setSelectedColor(firstColor)
+            setSelectComponents([<SortingContainer handleSortingClick={handleSortingColorClick} options={options[0]}/>,
+                <SortingContainer handleSortingClick={handleSortingMaterialClick} options={options[1]}/>])
+            ColorSelect(firstColor, firstSrc)
 
-    }
+
+
+
+        },[title])
 
     const ColorSelect=(color,src)=>{
         setSelectedColor(options[0].find(x=> x===color))
-        let srcColors = [...images.srcColors]
-        setImages({src: src, srcColors: [...srcColors]})
+        let srcColors = [...properties.srcColors]
+        setProperties({...properties, src: src, srcColors: [...srcColors]})
 
 
 
     }
 
-    selectComponents=([<SortingContainer handleSortingClick={handleSortingColorClick} options={options[0]}/>,
-        <SortingContainer handleSortingClick={handleSortingMaterialClick} options={options[1]}/>])
 
-
-
-    if(props.type==='full-view'){
+    if(props.type=='full-view'){
 
         return (<FullView
-            images={images}
             fullInfo={properties.fullInfo}
             properties={properties}
+            showView={showView}
             handleHover={handleHover}
             handleHoverExit={handleHoverExit}
             handleHoverEnter={handleHoverEnter}
@@ -149,15 +139,14 @@ export const QuickViewContainer=(props)=>{
             quantity={quantity}
             colorSelect={selectComponents[0]}
             materialSelect={selectComponents[1]}
-            selectedColor={'selectedColor'}
+            selectedColor={selectedColor}
             options={options}
         />)
 
-  }else if(props.type==='quick-view'){
+  }else{
 
 
         return (<QuickView
-            images={images}
             properties={properties}
             showView={showView}
             handleCloseClick={handleCloseClick}
@@ -170,12 +159,10 @@ export const QuickViewContainer=(props)=>{
             quantity={quantity}
             colorSelect={selectComponents[0]}
             materialSelect={selectComponents[1]}
-            selectedColor={'none'}
+            selectedColor={selectedColor}
             options={options}
             handleViewFullClick={handleViewFullClick}
         />)
-    }else{
-        return <Loading/>
     }
 }
 

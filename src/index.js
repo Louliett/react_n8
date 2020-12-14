@@ -9,13 +9,19 @@ import './css/item.css'
 import './css/screen_sizes.css'
 import './css/all.css'
 import {App} from './app'
+import {store} from '../src/reducer/reducers'
 
 
 
 
 
-ReactDOM.render(
-    <App/>,
-  document.getElementById('root')
-);
+
+    const render=()=>{ReactDOM.render(
+            <App />,
+        document.getElementById('root')
+    )}
+store.subscribe(render)
+render()//render initial state
+console.log(store.getState(),'what fucking state')
+
 

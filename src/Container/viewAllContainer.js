@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import {ViewAll} from '../Presentational/viewAll'
 import {ItemContainer} from "./itemContainer";
 import {QueryString} from 'query-string'
-import {CSSTransition} from "react-transition-group";
+import {SortingContainer} from "./sortingContainer";
 const queryString = require('query-string');
 //FIX RE-RENDERING SIDEBAR ON COLOR/MATERIAL CLICK
 //FIX RE-RENDERING SIDEBAR ON COLOR/MATERIAL CLICK
@@ -26,14 +26,10 @@ const queryString = require('query-string');
 export const ViewAllContainer=()=>{
     const [defaultItems, setDefaultItems] = useState([])
     const [items, setItems] = useState([])
-    const [visible, setVisible] = useState('not-visible')
-    const [iconFill, setIconFill] = useState('#cccccc')
-    const [sorting, setSorting] = useState('Default Sorting')
     const [pagination, setPagination] = useState(['1'])
     const [currentPage, setCurrentPage] = useState(1)
     const [currentPageItems, setCurrentPageItems] = useState([])
     const parsed = queryString.parse(document.location.search);
-    const [uniqueColors, setUniqueColors] = useState([{none:'none'}])
 
 
     useEffect(()=> {
@@ -41,7 +37,7 @@ export const ViewAllContainer=()=>{
         fetch('http://localhost:3000/db/items_old.json')
             .then(res => res.json())
             .then((result) => {
-                var resultItems=result['items']
+                let resultItems=result['items']
                 resultItems=resultItems.filter(item => {
                     if(item.title.includes(parsed.s) || item.materials.includes(parsed.s) || item.colors.includes(parsed.s) || item.tags.includes(parsed.s)){
                         return true
@@ -69,9 +65,9 @@ export const ViewAllContainer=()=>{
     },[])
 
     useEffect(()=>{
-        var numberPages=Math.ceil(items.length/9)
-        var pagesArray=Array.from(Array(numberPages).keys(), x => x + 1)
-        var pages=pagesArray.map(number => number===currentPage ? <li><a aria-current="page" className="page-numbers current">{number}</a></li> : <li onClick={handlePaginationClick} data-number={number}><a aria-current="page" className="page-numbers" style={{userSelect:'none', pointerEvents:'none'}}>{number}</a></li>)
+        let numberPages=Math.ceil(items.length/9)
+        let pagesArray=Array.from(Array(numberPages).keys(), x => x + 1)
+        let pages=pagesArray.map(number => number===currentPage ? <li><a aria-current="page" className="page-numbers current">{number}</a></li> : <li onClick={handlePaginationClick} data-number={number}><a aria-current="page" className="page-numbers" style={{userSelect:'none', pointerEvents:'none'}}>{number}</a></li>)
         if(pages.length>1){
             pages.push(<li><a className='nextPage'> > </a></li>)
         }
@@ -85,35 +81,53 @@ export const ViewAllContainer=()=>{
     },[currentPage])
 
     useEffect(()=>{
-        const high=currentPage*9
-        const low=0+((currentPage-1)*9)
-        setCurrentPageItems(items.slice(low,high))
+        if(items.length>9){
+            const high=currentPage*9
+            const low=0+((currentPage-1)*9)
+            setCurrentPageItems(items.slice(low,high))
+        }else{
+            const high=items.length
+            const low=1
+            setCurrentPageItems(items)
+        }
     },[pagination])
+
+    useEffect(()=>{
+        console.log('eat a dick react')
+    },[currentPageItems])
 
 
 
     const handleSortingClick=(e)=>{
-        setSorting(e.target.dataset.type)
-        setVisible('not-visible')
+
+        //setSorting(e.target.dataset.type)
+        //setVisible('not-visible')
+
         if(e.target.dataset.type==='Default Sorting') {
+            console.log(e.target.dataset,'1')
             setItems([...defaultItems])
         }else if(e.target.dataset.type==='Price: high to low'){
-            setCurrentPageItems(items.sort(function (a, b) {
+            console.log(e.target.dataset,'2')
+            setItems([...defaultItems.sort(function (a, b) {
                 return b.props.price - a.props.price
-            }));
+            })]);
         }else if(e.target.dataset.type==='Price: low to high'){
-            setCurrentPageItems(items.sort(function (a, b) {
+            console.log(e.target.dataset,'3')
+            setItems([...defaultItems.sort(function (a, b) {
                 return a.props.price - b.props.price
-            }));
+            })]);
         }else if(e.target.dataset.type==='Sort by latest'){
-            setCurrentPageItems(items.sort(function (a, b) {
+            console.log(e.target.dataset,'4')
+            setItems([...defaultItems.sort(function (a, b) {
                 return b.props.time - a.props.time
-            }));
+            })]);
         }else if(e.target.dataset.type==='Sort by Popularity'){
-            setCurrentPageItems(items.sort(function (a, b) {
+            console.log(e.target.dataset,'5')
+            setItems([...defaultItems.sort(function (a, b) {
                 return b.props.popularity - a.props.popularity
-            }));
+            })]);
         }else{
+            console.log(e.target.dataset,'6')
             setItems([...defaultItems])
         }
     }
@@ -124,19 +138,6 @@ export const ViewAllContainer=()=>{
         }catch (error){
             console.log(error)
         }
-    }
-
-
-
-    const handleSelectClick=()=>{
-        if(visible==='not-visible') {
-            setVisible('visible')
-            setIconFill('#211f1f')
-        }else{
-            setVisible('not-visible')
-            setIconFill('#cccccc')
-        }
-
     }
 
     const handleColorClick=(e)=>{
@@ -158,10 +159,11 @@ export const ViewAllContainer=()=>{
 
 
     const findUniqieColors=()=>{
+        return
 
     }
+    const selectMenu=<SortingContainer handleSortingClick={handleSortingClick} options={['Default Sorting','Sort by Popularity','Sort by latest','Price: low to high','Price: high to low']}/>
 
 
-
-    return <ViewAll allItems={defaultItems} items={currentPageItems} handleSelectClick={handleSelectClick} visible={visible} iconFill={iconFill} sorting={sorting} handleSortingClick={handleSortingClick} handleColorClick={handleColorClick} handleMaterialClick={handleMaterialClick} handleFilterClick={handleFilterClick} handleSearchClick={handleSearchClick} pagination={pagination} currentPage={currentPage} itmesLength={items.length} bannerTitle={parsed}/>
+    return <ViewAll allItems={defaultItems} items={currentPageItems} handleColorClick={handleColorClick} handleMaterialClick={handleMaterialClick} handleFilterClick={handleFilterClick} handleSearchClick={handleSearchClick} pagination={pagination} currentPage={currentPage} itmesLength={items.length} bannerTitle={parsed} selectMenu={selectMenu}/>
 }

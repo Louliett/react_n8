@@ -2,15 +2,19 @@ import React from "react";
 
 
 export const Sorting=(props)=>{
+    let jsxListItems=<div></div>
+    let jsxOptions=<div></div>
+    try {
+        jsxListItems = props.options.map(item => <li key={item} onClick={props.handleSortingClick} data-type={item}>{item}</li>)
+        jsxOptions = props.options.map(item => <option key={item} value={item}>{item}</option>)
+    } catch (e) {
+        console.log(e)
+    }
     return(
         <form className='ordering' method='get'>
             <select name="orderby" className="orderby hidden-accessible"
                     aria-label="Shop order" tabIndex="-1" aria-hidden="true">
-                <option value="menu_order" selected="selected">Default sorting</option>
-                <option value="popularity">Sort by popularity</option>
-                <option value="date">Sort by latest</option>
-                <option value="price">Sort by price: low to high</option>
-                <option value="price-desc">Sort by price: high to low</option>
+                {jsxOptions}
             </select>
             <span className='select-container'>
                                             <span className='select'>
@@ -33,7 +37,7 @@ export const Sorting=(props)=>{
                                                 <span className='absolute-dropdown-below'>
                                                     <span className='absolute-dropdown-results'>
                                                         <ul>
-                                                            {props.jsxListItems}
+                                                            {jsxListItems}
 
                                                         </ul>
 

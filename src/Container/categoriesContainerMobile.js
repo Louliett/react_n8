@@ -11,7 +11,6 @@ export const CategoriesContainerMobile=(props)=>{
       .then(res => res.json())
       .then(
         (result) => {
-        console.log(result)
           setCategories(result.Categories);
         },
         (error) => {

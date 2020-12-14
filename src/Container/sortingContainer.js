@@ -6,26 +6,30 @@ import {Sorting} from '../Presentational/sorting'
 //implementing component must provide the options as well
 export const SortingContainer=(props)=>{
     const [options, setOptions] = useState(['none'])
+    const [sorting, setSorting] = useState(['Default'])
     const [visible, setVisible] = useState(['not-visible','#cccccc'])
-    let jsxListItems=options.map(item=><li onClick={props.handleSortingClick} data-type={item}>{item}</li>)
-    let jsxOptions=options.map(item=><option value={item}>{item}</option>)
 
     useEffect(()=>{
-        setOptions(props.options)
+        if(props.options) {
+            setOptions(props.options)
+            setSorting(props.options[0])
+        }
     },[props.options])
 
-    useEffect(()=>{
-        jsxListItems=options.map(item=><li onClick={props.handleSortingClick} data-type={item}>{item}</li>)
-        jsxOptions=options.map(item=><option value={item}>{item}</option>)
-    },[options])
 
     const handleMenuClick=()=>{
-            if(visible==='not-visible') {
-                setVisible('visible', '#211f1f')
+            if(visible[0]==='not-visible') {
+                setVisible(['visible', '#211f1f'])
             }else{
-                setVisible('not-visible','#cccccc')
+                setVisible(['not-visible','#cccccc'])
             }
     }
+    const handleSortingClickLocal=(e)=>{
+        setSorting(e.target.dataset.type)
+        setVisible(['not-visible','#cccccc'])
 
-    return <Sorting jsxListItems={jsxListItems} jsxOptions={jsxOptions} visible={visible} handleMenuClick={handleMenuClick}/>
+        props.handleSortingClick(e)
+    }
+
+    return <Sorting options={options} visible={visible} handleMenuClick={handleMenuClick} sorting={sorting} handleSortingClick={handleSortingClickLocal}/>
 }

@@ -4,31 +4,38 @@ import { Header_Container_Mobile } from './Container/headerMobileContainer'
 import { Footer_Container } from './Container/footerContainer'
 import { BodyContainer } from './Container/bodyContainer'
 import {QuickViewContainer} from "./Container/quickViewContainer";
+import {store} from "./reducer/reducers";
+import {ItemContainer} from "./Container/itemContainer";
 
 
 export const App=()=>{
-    const [pros, setPros]=useState({
-        descriptionBrief:'I dont know why you are seeing this but you should not. Make sure to click away and forget about it.',
-        tags:['none'],
-        srcSmall:['https://cdn.dribbble.com/users/2285628/screenshots/10774525/media/a660ab310be9bed8b4e31e9c3d5dc736.png','https://cdn.dribbble.com/users/2285628/screenshots/10774525/media/a660ab310be9bed8b4e31e9c3d5dc736.png'],
-        title: 'You should not be here',
-        price:'404.00$',
-        src:'https://cdn.dribbble.com/users/2285628/screenshots/10774525/media/a660ab310be9bed8b4e31e9c3d5dc736.png',
-        open:'false'
-    })
-    const setProperties=(properties)=>{
-        console.log(properties, 'ass you fucking ass')
-        setPros(properties)
+    console.log('APP RENDER MEANS EVERYTHING RENDER')
+    try {
+        fetch('http://localhost:3000/db/items_old.json')
+            .then(res => res.json())
+            .then((result) => {
+                /*setItems(result['items'].map(item => <ItemContainer key={item.title} setProperties={props.setProperties}
+                                                                    descriptionBrief={item.descriptionBrief}
+                                                                    tags={item.tags} srcSmall={item.srcSmall}
+                                                                    title={item.title} price={item.price} src={item.src}
+                                                                    colors={item.srcColors.map(x=>x.color)} materials={item.materials}
+                                                                    srcColors={item.srcColors} id={item.id} fullInfo={item.fullInfo}/>));*/
+                store.dispatch({type:'LOAD_PRODUCTS',payload:result['items']})
+
+            }, (error) => {
+                console.log('error fetching items',error)
+            })
+    } catch (e) {
+        console.log(e)
     }
 
     return (
-        <React.StrictMode>
+        <div>
             <Header_Container/>
             <Header_Container_Mobile/>
-            <BodyContainer setProperties={setProperties}/>
-            <QuickViewContainer properties={pros}/>
+            <BodyContainer/>
             <Footer_Container/>
-        </React.StrictMode>
+        </div>
       )
 
 }

@@ -6,7 +6,7 @@ export const CategoryDropdownContainer=(props)=>{
     useEffect(() => {
         fetch('http://localhost:3000/db/'+props.category+'.json')
             .then(res => res.json())
-            .then((result) => {console.log(result); setSelectedCategory(result[props.category]);},(error) => { setSelectedCategory(['error']) })
+            .then((result) => {setSelectedCategory(result[props.category]);},(error) => { setSelectedCategory(['error']) })
     }, [])
     const style={
         height: 0,

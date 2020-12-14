@@ -3,9 +3,9 @@ import {PostContainer} from "../Container/postContainer";
 
 
 export const SeveralDivs=(props)=>{
-    var posts=[]
+    let posts=[]
     if(props.posts.length>0){
-         posts=props.posts.map(post=><PostContainer src={post.src} text={post.text} title={post.title}/>)}
+         posts=props.posts.map((post,index)=><PostContainer key={index} src={post.src} text={post.text} title={post.title}/>)}
 
     return(
         <div className='several-divs-wrapper'>

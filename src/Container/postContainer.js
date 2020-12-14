@@ -4,5 +4,5 @@ import {Post} from '../Presentational/post'
 
 
 export const PostContainer=(props)=>{
-    return <Post src={props.src} title={props.title} text={props.text}/>
+    return <Post key={props.title} src={props.src} title={props.title} text={props.text}/>
 }

@@ -7,10 +7,9 @@ export const CategoryDropdownContainerMobile=(props)=>{
     useEffect(() => {
         fetch('http://localhost:3000/db/'+props.category+'.json')
             .then(res => res.json())
-            .then((result) => {console.log(result); setSelectedCategory(result[props.category]);},(error) => { setSelectedCategory(['error']) })
+            .then((result) => {setSelectedCategory(result[props.category]);},(error) => { setSelectedCategory(['error']) })
     }, [])
     useEffect(()=>{
-        console.log(props.target, props.category, showMenu, props.show)
         if(props.target===props.category && showMenu==false){
             setShowMenu(true)
         }else if(props.target===props.category && showMenu==true){

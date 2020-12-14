@@ -3,11 +3,12 @@ import {ItemOptionsContainer} from "../Container/itemOptionsContainer";
 
 
 export const Item=(props)=>{
+
     return (
         <div className='item-space product'>
             <div className='item-space-inner'>
                 <div className='item-space-inner-image'>
-                    <img className='product-image' src={props.src}/>
+                    <img className='product-image' onError={props.loading} src={props.src}/>
 
                 </div>
                 {props.options}

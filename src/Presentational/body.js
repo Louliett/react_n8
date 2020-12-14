@@ -4,6 +4,8 @@ import {ProductsDisplayContainer} from "../Container/productsDisplayContainer";
 import {BannerContainer} from "../Container/bannerContainer";
 import {SeveralDivsContainer} from "../Container/severalDivsContainer";
 import {ExtraDivContainer} from "../Container/extraDivContainer";
+import {QuickViewContainer} from "../Container/quickViewContainer";
+import {Route} from "react-router-dom";
 
 export const Body=(props)=>{
 
@@ -25,16 +27,18 @@ export const Body=(props)=>{
     const className='paralax-class'
 
 
-   return (
+
+
+    return (
        <ParallaxProvider>
-       <div className='main-wrapper'>
+           <div className='main-wrapper'>
            <div className='main-inner'>
                <div className='full-width'>
                    <div className='full-width-inner'>
                        <div className='grid-row'>
                                <div className='grid-col-12 content-holder'>
                                    <BannerContainer children={bannerChildren} src={src} style={style} class={className} type='full'/>
-                                   <ProductsDisplayContainer setProperties={props.setProperties}/>
+                                   <ProductsDisplayContainer/>
                                    <SeveralDivsContainer/>
                                    <ExtraDivContainer/>
                                </div>
