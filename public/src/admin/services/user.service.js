@@ -19,7 +19,7 @@ export async function getUsersPerPage(page_number, users_per_page) {
     redirect: 'follow'
   };
   
-  let response = fetch(API_URL + page_number + "/" + users_per_page, requestOptions);
+  let response = await fetch(API_URL + page_number + "/" + users_per_page, requestOptions);
   let message = await response.json();
   return message;
 }

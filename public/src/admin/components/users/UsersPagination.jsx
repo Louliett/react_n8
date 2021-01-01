@@ -4,9 +4,7 @@ import { Pagination } from 'semantic-ui-react';
 export function UsersPagination(props) {
 
     return(
-        <Pagination 
-            //defaultActivePage={props.defaultActivePage}
-            //activePage={props.activePage}
+        <Pagination
             totalPages={props.totalPages}
             onPageChange={props.onPageChange}
             firstItem={null}

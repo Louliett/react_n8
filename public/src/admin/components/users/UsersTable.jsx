@@ -37,7 +37,10 @@ export function UsersTable(props) {
                     <Table.Row>
                         <Table.HeaderCell colSpan='3'>
                             <Menu floated='right' pagination>
-                                <UsersPaginationContainer totalPages={props.users} />
+                                <UsersPaginationContainer 
+                                    totalPages={props.totalPages}
+                                    setCurrentPage={props.setCurrentPage}
+                                />
                             </Menu>
                         </Table.HeaderCell>
                     </Table.Row>

@@ -1,23 +1,31 @@
 import { useState, useEffect } from 'react';
 import { UsersTable } from './UsersTable';
-import { getAllUsers } from '../../services/user.service';
+import { getUsersPerPage } from '../../services/user.service';
 import { getAddressByUserId } from '../../services/address.service';
 
 
 export function UsersTableContainer(props) {
 
+    const users_per_page = 10;
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     const [users, setUsers] = useState([{
         first_name: "Loading...",
         last_name: "Loading...",
         email: "Loading..."
     }]);
-    
+
     useEffect(() => {
-        getAllUsers()
+        getUsersPerPage(currentPage, users_per_page)
             .then((response) => {
-                setUsers(response);
-            }).catch(error => console.error(error))
-    }, [props.trigger]);
+                //the server returns an array with:
+                //*total pages at index 0
+                //*array of users per page at index 1
+                setTotalPages(response[0]);
+                setUsers(response[1]);
+            }).catch(error => console.error(error));
+
+    }, [currentPage, props.trigger]);
 
     function handleInspect(row) {
         getAddressByUserId(row.id)
@@ -29,10 +37,11 @@ export function UsersTableContainer(props) {
     }
     
     return (
-        <UsersTable 
+        <UsersTable
             users={users}
             onInspect={handleInspect}
-            
+            setCurrentPage={setCurrentPage}
+            totalPages={totalPages}
         />
     );
 }

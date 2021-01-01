@@ -24,9 +24,6 @@ router.get('/:page/:users_per_page', (req, res) => {
     let usersPerPage = req.params.users_per_page;
     let sql = "SELECT * FROM user;";
 
-    console.log('requested page: ' + page);
-    console.log('users per page: ' + usersPerPage);
-
     connection.query(sql, (err, rows, fields) => {
       if (err) {
         res.send(err);

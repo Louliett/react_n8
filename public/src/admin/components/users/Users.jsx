@@ -7,8 +7,6 @@ import { Button } from 'semantic-ui-react';
 
 export function Users(props) {
 
-    
-
     return (
         <div className="users">
             <HeaderContainer />
