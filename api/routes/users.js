@@ -4,8 +4,9 @@ const express = require('express');
 const router = express.Router();
 const connection = require('../../user_db');
 const { transporter, mailOptions } = require('../services/mail.services');
+const { sortUsersPerPage } = require('../services/user.services');
 
-//get all the customers
+//get all the users
 router.get('/', (req, res) => {
     let sql = "SELECT * FROM user;";
     connection.query(sql, (err, rows, fields) => {
@@ -16,6 +17,27 @@ router.get('/', (req, res) => {
       }
     });
   });
+
+//get users per page
+router.get('/:page/:users_per_page', (req, res) => {
+    let page = req.params.page;
+    let usersPerPage = req.params.users_per_page;
+    let sql = "SELECT * FROM user;";
+
+    console.log('requested page: ' + page);
+    console.log('users per page: ' + usersPerPage);
+
+    connection.query(sql, (err, rows, fields) => {
+      if (err) {
+        res.send(err);
+      } else {
+          let users_per_page = sortUsersPerPage(rows, page, usersPerPage)
+          res.send(users_per_page);
+      }
+    });
+  });
+
+
 
 //deletes an user and all associated addresses
 router.delete('/delete/:userid', (req, res) => {
@@ -130,6 +152,8 @@ router.post('/generate-user', (req, res) => {
             res.send('done');
         }
     });
+
+
 
 });
 

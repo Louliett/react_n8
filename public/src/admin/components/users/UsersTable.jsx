@@ -1,7 +1,8 @@
 import React from 'react';
 import './user-table.css';
 import 'semantic-ui-css/semantic.min.css';
-import { Button, Table } from 'semantic-ui-react';
+import { Button, Table, Menu } from 'semantic-ui-react';
+import { UsersPaginationContainer } from './UsersPaginationContainer';
 
 export function UsersTable(props) {
 
@@ -31,6 +32,16 @@ export function UsersTable(props) {
                         );
                     })}
                 </Table.Body>
+
+                <Table.Footer>
+                    <Table.Row>
+                        <Table.HeaderCell colSpan='3'>
+                            <Menu floated='right' pagination>
+                                <UsersPaginationContainer totalPages={props.users} />
+                            </Menu>
+                        </Table.HeaderCell>
+                    </Table.Row>
+                </Table.Footer>
             </Table>
         </div>
     );

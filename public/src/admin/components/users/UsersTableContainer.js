@@ -31,7 +31,8 @@ export function UsersTableContainer(props) {
     return (
         <UsersTable 
             users={users}
-            onInspect={handleInspect} 
+            onInspect={handleInspect}
+            
         />
     );
 }
