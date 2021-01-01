@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Users } from './Users';
-import { UserModalContainer } from './UserModalContainer';
-import { getAllUsers } from '../../services/user.service';
+// import { UserModalContainer } from './UserModalContainer';
+// import { getAllUsers } from '../../services/user.service';
 
 export function UsersContainer() {
 
