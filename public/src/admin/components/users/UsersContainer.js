@@ -5,6 +5,8 @@ import { getAllUsers } from '../../services/user.service';
 
 export function UsersContainer() {
 
+    //preparing for search bar
+
     const [showModal, setShowModal] = useState(false);
     const [user, setUser] = useState({
         id: "Loading..",
