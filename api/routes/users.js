@@ -3,12 +3,14 @@
 const express = require('express');
 const router = express.Router();
 const connection = require('../../user_db');
-const { transporter, mailOptions } = require('../services/mail.services');
-const { sortUsersPerPage } = require('../services/user.services');
+const { transporter, mailOptions } = require('../services/mail.service');
+const { sortUsersPerPage } = require('../services/user.service');
+const { getCurrentDate } = require('../services/time.service');
 
 //get all the users
 router.get('/', (req, res) => {
     let sql = "SELECT * FROM user;";
+
     connection.query(sql, (err, rows, fields) => {
       if (err) {
         res.send(err);
@@ -17,6 +19,27 @@ router.get('/', (req, res) => {
       }
     });
   });
+
+//search bar
+router.get('/:query/:page_number/:users_per_page', (req, res) => {
+    let query = '%' + req.params.query + '%';
+    let page_number = req.params.page_number;
+    let users_per_page = req.params.users_per_page;
+    let params = [query, query, query];
+    let sql = "SELECT * FROM user " +
+              "WHERE first_name LIKE ? " + 
+              "OR last_name LIKE ? " +
+              "OR email LIKE ?;";
+
+    connection.query(sql, params, (err, rows, fields) => {
+        if (err) {
+            res.send(err);
+        } else {
+            let items_per_page = sortUsersPerPage(rows, page_number, users_per_page)
+            res.send(items_per_page);
+        }
+    });
+});
 
 //get users per page
 router.get('/:page/:users_per_page', (req, res) => {
@@ -130,9 +153,11 @@ router.put('/reset-password', (req, res) => {
 router.post('/generate-user', (req, res) => {
     var us = Math.random().toString(36).substr(2, 5);
     var ad = Math.random().toString(36).substr(2, 5);
-    var params = [us, us, us, us, ad, ad, ad, ad, 99, 0, ad, ad, ad, ad, 99, 1];
-    const user =    "INSERT INTO user (first_name, last_name, email, password) " +
-                    "VALUES (?, ?, ?, ?); " +
+    var date = getCurrentDate();
+    var params = [us, us, us, us, date, ad, ad, ad, ad, 99, 0, ad, ad, ad, ad, 99, 1];
+
+    const user =    "INSERT INTO user (first_name, last_name, email, password, registration_date) " +
+                    "VALUES (?, ?, ?, ?, ?); " +
                     "SET @userID = LAST_INSERT_ID(); ";
     const address = "INSERT INTO address (name, second_name, city, postcode, phone_number, shipping) " +
                     "VALUES (?, ?, ?, ?, ?, ?); " +

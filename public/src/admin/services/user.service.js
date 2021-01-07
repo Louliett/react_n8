@@ -24,6 +24,19 @@ export async function getUsersPerPage(page_number, users_per_page) {
   return message;
 }
 
+//search users that contain specific keyword
+export async function getUsersByKeyword(keyword, page_number, users_per_page) {
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  let response = await fetch(API_URL + keyword + '/' + page_number + "/" + users_per_page, requestOptions);
+  let message = await response.json();
+  return message;
+}
+
+
 //deletes the user and associated addresses
 export async function deleteUser(userId) {
   var requestOptions = {

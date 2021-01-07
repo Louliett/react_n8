@@ -17,7 +17,6 @@ export function UsersContainer() {
         password: "Loading.."
     });
     const [addresses, setAddresses] = useState([]);
-
     const [trigger, setTrigger] = useState('');
 
     //temporary

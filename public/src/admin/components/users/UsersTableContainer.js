@@ -12,7 +12,8 @@ export function UsersTableContainer(props) {
     const [users, setUsers] = useState([{
         first_name: "Loading...",
         last_name: "Loading...",
-        email: "Loading..."
+        email: "Loading...",
+        registred: "Loading..."
     }]);
 
     useEffect(() => {

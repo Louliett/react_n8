@@ -14,6 +14,7 @@ export function UsersTable(props) {
                         <Table.HeaderCell>First Name</Table.HeaderCell>
                         <Table.HeaderCell>Last Name</Table.HeaderCell>
                         <Table.HeaderCell>Email</Table.HeaderCell>
+                        <Table.HeaderCell>Registred</Table.HeaderCell>
                         <Table.HeaderCell></Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
@@ -25,6 +26,7 @@ export function UsersTable(props) {
                                 <Table.Cell>{user.first_name}</Table.Cell>
                                 <Table.Cell>{user.last_name}</Table.Cell>
                                 <Table.Cell>{user.email}</Table.Cell>
+                                <Table.Cell>{user.registration_date}</Table.Cell>
                                 <Table.Cell>
                                     <Button onClick={() => {props.onInspect(user)}}>Inspect</Button>
                                 </Table.Cell>

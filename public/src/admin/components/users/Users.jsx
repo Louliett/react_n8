@@ -3,6 +3,7 @@ import './users.css';
 import { HeaderContainer } from '../header/HeaderContainer';
 import { UserModalContainer } from './UserModalContainer';
 import { UsersTableContainer } from './UsersTableContainer';
+import { SearchBarContainer } from './SearchBarContainer';
 import { Button } from 'semantic-ui-react';
 
 export function Users(props) {
@@ -12,6 +13,8 @@ export function Users(props) {
             <HeaderContainer />
             <h1>Users</h1>
             <Button onClick={props.addUser}>add user</Button>
+            <br/>
+            <SearchBarContainer/>
             <UserModalContainer 
                 showModal={props.showModal} 
                 setShowModal={props.setShowModal}
