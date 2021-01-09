@@ -7,11 +7,11 @@ export function UserModal (props) {
     return(
         <Modal open={props.open}>
             <Modal.Header>
-                {props.user.first_name + ' ' + props.user.last_name + ' | ' + props.user.email} 
+                {props.modalUserInfo.first_name + ' ' + props.modalUserInfo.last_name + ' | ' + props.modalUserInfo.email} 
             </Modal.Header>
             <Modal.Description>
                 <ul>
-                    {(props.addresses).map((address, index) => {
+                    {(props.modalAddressList).map((address, index) => {
                         return (
                             <li key={index}>
                                 <p>
@@ -28,7 +28,7 @@ export function UserModal (props) {
                 </ul>
             </Modal.Description>
             <Modal.Actions>
-                <Button color="red" onClick={() => {props.onDelete(props.user.id)}}>Delete</Button>
+                <Button color="red" onClick={() => {props.onDelete(props.modalUserInfo.id)}}>Delete</Button>
                 <Button color="blue" onClick={props.onClose}>Close</Button>
             </Modal.Actions>
         </Modal>

@@ -15,14 +15,13 @@ export function UserModalContainer(props) {
 
     function handleClose() {
         props.setShowModal(false);
-        console.log(props.user);
     }
 
     return(
         <UserModal
             open={props.showModal}
-            user={props.user}
-            addresses={props.addresses}
+            modalUserInfo={props.modalUserInfo}
+            modalAddressList={props.modalAddressList}
             onDelete={handleDelete}
             onClose={handleClose}
         />

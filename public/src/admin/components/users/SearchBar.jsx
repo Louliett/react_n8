@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Grid, Header, Segment } from 'semantic-ui-react';
+import { Search, Grid } from 'semantic-ui-react';
 
 export function SearchBar(props) {
 
@@ -7,12 +7,11 @@ export function SearchBar(props) {
         <Grid>
             <Grid.Column width={6}>
                 <Search
+                    //loading animation
                     loading={props.loading}
-                    // onResultSelect={(e, data) =>
-                    //   dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })
-                    // }
+                    //controls wheter there is a dropdown menu for results
+                    open={false}
                     onSearchChange={props.onSearchChange}
-                    //results={props.results}
                     value={props.value}
                 />
             </Grid.Column>

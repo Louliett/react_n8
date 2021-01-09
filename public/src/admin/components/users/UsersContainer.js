@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { Users } from './Users';
-// import { UserModalContainer } from './UserModalContainer';
-// import { getAllUsers } from '../../services/user.service';
 
+//this is a parent component
 export function UsersContainer() {
 
-    //preparing for search bar
-
+    //user modal--------------------------------------
     const [showModal, setShowModal] = useState(false);
-    const [user, setUser] = useState({
+    const [modalUserInfo, setModalUserInfo] = useState({
         id: "Loading..",
         stripe_id: "Loading..",
         first_name: "Loading..",
@@ -16,8 +14,27 @@ export function UsersContainer() {
         email: "Loading..",
         password: "Loading.."
     });
-    const [addresses, setAddresses] = useState([]);
+    const [modalAddressList, setModalAddressList] = useState([]);
     const [trigger, setTrigger] = useState('');
+    //----------------------------------------------------
+
+    //user table ------------------------------------------
+    const users_per_page = 10;
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [users, setUsers] = useState([{
+        first_name: "Loading...",
+        last_name: "Loading...",
+        email: "Loading...",
+        registred: "Loading..."
+    }]);
+    //-----------------------------------------------------
+
+    //user search bar -------------------------------------
+    const [searchMode, setSearchMode] = useState(false);
+    //----------------------------------------------------
+
+
 
     //temporary
     function addUser() {
@@ -38,13 +55,23 @@ export function UsersContainer() {
         <Users 
             showModal={showModal}
             setShowModal={setShowModal}
-            user={user}
-            setUser={setUser}
-            addresses={addresses}
-            setAddresses={setAddresses}
+            modalUserInfo={modalUserInfo}
+            setModalUserInfo={setModalUserInfo}
+            modalAddressList={modalAddressList}
+            setModalAddressList={setModalAddressList}
             addUser={addUser}
             trigger={trigger}
             setTrigger={setTrigger}
+
+            searchMode={searchMode}
+            setSearchMode={setSearchMode}
+            users={users}
+            setUsers={setUsers}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            totalPages={totalPages}
+            setTotalPages={setTotalPages}
+            users_per_page={users_per_page}
         />
     );
 }
