@@ -25,7 +25,7 @@ export const SortingContainer=(props)=>{
             }
     }
     const handleSortingClickLocal=(e)=>{
-        setSorting(e.target.dataset.type)
+        setSorting(e.target.key)
         setVisible(['not-visible','#cccccc'])
 
         props.handleSortingClick(e)

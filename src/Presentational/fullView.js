@@ -59,7 +59,7 @@ export const FullView=(props)=>{
                                         <p className='price'><span className='amount'>{props.properties.price}.лв</span></p>
                                         <div className='short-description'><p>{props.properties.descriptionBrief}</p></div>
                                         <div className='meta'>
-                                            <span className='sku-wrapper'>SKU: {props.fullInfo.sku}</span>
+                                            <span className='sku-wrapper'>SKU: {props.properties.fullInfo.sku}</span>
                                             <span className='tagged-as'>Tags: {tagItems}</span>
                                         </div>
                                         <div className="cart">

@@ -5,6 +5,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@material-ui/core": "^4.11.2",
+    "@reduxjs/toolkit": "^1.5.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -27,7 +28,9 @@
     "react-scripts": "3.4.3",
     "react-scroll-parallax": "^2.3.5",
     "react-transition-group": "^4.4.1",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "vin-decode": "^0.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

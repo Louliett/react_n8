@@ -21,8 +21,8 @@ export const ProductsDisplay=(props)=>{
                                                         <div className='pl-gutter'></div>
                                                         {props.items}
                                                         <div className='empty-space'></div>
-                                                            <a className='view-all-button' onClick={props.handleClick} href={props.href}>
-                                                                <span className='button-text'>{props.buttonText}
+                                                            <a className='view-all-button' href='http://localhost:3000/view-all'>
+                                                                <span className='button-text'>View All
                                                                 </span>
                                                             </a>
                                                     </div>

@@ -1,16 +1,20 @@
 import React,{useEffect,useState} from 'react'
 import {ItemOptions} from '../Presentational/itemOptions'
-import {QuickViewContainer} from "./quickViewContainer";
-
+import { useSelector, useDispatch } from 'react-redux';
+import {
+    selectProductReducer
+} from '../reducer/n8Slice';
 
 export const ItemOptionsContainer=(props)=>{
-    const [proper, setProper] =useState('false')
+    const dispatch = useDispatch();
+
 
 
     const handleClick=()=>{
-            props.setProperties({...props.properties,open:true})
+        dispatch(selectProductReducer(props.id))
+
 
     }
 
-    return <ItemOptions view={props.view} handleClick={handleClick}/>
+    return <ItemOptions handleClick={handleClick}/>
 }

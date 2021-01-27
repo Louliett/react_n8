@@ -22,12 +22,12 @@ export const SearchPopUp=(props)=>{
             <div className='full-screen-search-table'>
                 <div className='full-screen-search-cell'>
                     <div className='full-screen-search-inner'>
-                        <form className='search-form' method='get' action='http://localhost:3000/view-all'>
+                        <div className='search-form'>
                             <div className='form-holder grid'>
                                 <h4 className='search-label'>Search</h4>
                                 <div className='search-form-inner'>
-                                    <input className='search-field' type="text" placeholder="Enter your keyword" name="s" autoComplete="off"/>
-                                    <button id='search-submit' type='submit'>
+                                    <input className='search-field' type="text" placeholder="Enter your keyword" name="s" autoComplete="off" onChange={props.handleChange}/>
+                                    <button id='search-submit' onClick={props.handleClick}>
                                         <span className='search-icon-holder'>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="48px" height="48px">
                                                 <path d="M0 0h24v24H0V0z" fill="none"/>
@@ -40,7 +40,7 @@ export const SearchPopUp=(props)=>{
                                 </div>
 
                             </div>
-                        </form>
+                        </div>
 
                     </div>
 

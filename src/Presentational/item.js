@@ -8,7 +8,7 @@ export const Item=(props)=>{
         <div className='item-space product'>
             <div className='item-space-inner'>
                 <div className='item-space-inner-image'>
-                    <img className='product-image' onError={props.loading} src={props.src}/>
+                    <img className='product-image' onError={props.loading} src={props.properties.src}/>
 
                 </div>
                 {props.options}
@@ -16,10 +16,10 @@ export const Item=(props)=>{
             </div>
             <div className='text-wrapper'>
                 <div className='main-info'>
-                    <h4 className='main-info-title'><a href='#'>{props.title}</a></h4>
+                    <h4 className='main-info-title'><a href='#'>{props.properties.title}</a></h4>
                     <div className='item-price'>
                         <span className='amount'>
-                            {props.price}
+                            {props.properties.price}
                             <span className='currency'> лв.</span>
                         </span>
                     </div>

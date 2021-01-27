@@ -48,5 +48,8 @@ const products=(state=[], action)=>{
 const n8App=combineReducers({selectedProduct:selectedProduct,products:products})
 
 
-export const store=createStore(n8App)
+export const store = createStore(
+    n8App, /* preloadedState, */
+    +  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 

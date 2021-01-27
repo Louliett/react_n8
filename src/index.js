@@ -9,19 +9,15 @@ import './css/item.css'
 import './css/screen_sizes.css'
 import './css/all.css'
 import {App} from './app'
-import {store} from '../src/reducer/reducers'
+import store from './store/store';
+import { Provider } from 'react-redux';
 
-
-
-
-
-
-    const render=()=>{ReactDOM.render(
-            <App />,
-        document.getElementById('root')
-    )}
-store.subscribe(render)
-render()//render initial state
-console.log(store.getState(),'what fucking state')
+ReactDOM.render(
+    <React.StrictMode>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root'))
 
 

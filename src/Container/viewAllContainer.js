@@ -34,7 +34,7 @@ export const ViewAllContainer=()=>{
 
     useEffect(()=> {
         if(parsed.s != undefined){
-        fetch('http://localhost:3000/db/items_old.json')
+        /*fetch('http://localhost:3000/db/items_old.json')
             .then(res => res.json())
             .then((result) => {
                 let resultItems=result['items']
@@ -50,7 +50,7 @@ export const ViewAllContainer=()=>{
             }, (error) => {
                 setItems({error: 'error'})
                 setDefaultItems({error: 'error'})
-            })
+            })*/
         }else{
             fetch('http://localhost:3000/db/items_old.json')
                 .then(res => res.json())
@@ -83,7 +83,7 @@ export const ViewAllContainer=()=>{
     useEffect(()=>{
         if(items.length>9){
             const high=currentPage*9
-            const low=0+((currentPage-1)*9)
+            const low=((currentPage-1)*9)
             setCurrentPageItems(items.slice(low,high))
         }else{
             const high=items.length

@@ -4,34 +4,34 @@ import {ItemContainer} from "./itemContainer";
 import {Loading} from "../Presentational/loading";
 import {QuickViewContainer} from "./quickViewContainer";
 import {useStore} from "react-redux";
-import {store} from "../reducer/reducers";
+import { useSelector, useDispatch } from 'react-redux';
+import {
+    loadProducts,
+    selectProductReducer,
+    closeModal,
+    selectProduct,
+    productsExport,
+    loadProductsAsync,
+    displayPageProducts,
+    productsOnPageExport,
+} from '../reducer/n8Slice';
 
 
 export const ProductsDisplayContainer=(props)=>{
-    //const [items, setItems]=useState([<Loading key='loading'/>]) //gonna put a loading component here
-    const [partialItems, setPartialItems]=useState([<Loading key='partialLoading'/>])
-    const [buttonText, setButtonText]=useState('View More')
-    const [clicked, setClicked]=useState(false)
-    const [href, setHref]=useState('javascript:void(0);')
-    console.log(store.getState(),'how')
-    let items=store.getState().products.map(item => <ItemContainer key={item.title} setProperties={props.setProperties}
-                                                                                               descriptionBrief={item.descriptionBrief}
-                                                                                               tags={item.tags} srcSmall={item.srcSmall}
-                                                                                               title={item.title} price={item.price} src={item.src}
-                                                                                               colors={item.srcColors.map(x=>x.color)} materials={item.materials}
-                                                                                               srcColors={item.srcColors} id={item.id} fullInfo={item.fullInfo}/>)
+    let partialItems=[]
+    const products = useSelector(productsExport);
+    const productsOnPage = useSelector(productsOnPageExport);
+    const selectedProduct = useSelector(selectProduct);
+    const dispatch = useDispatch();
+    useEffect(()=>{dispatch(loadProductsAsync())},[])
+
+    let items=productsOnPage.map(item => <ItemContainer key={item.id} properties={item}/>)
 
 
 
-        useEffect(()=>{
-            if(items.length>6){
-                setPartialItems(items.slice(0,6))
-            }else{
-                setPartialItems(items)
-            }
-        },[items])
 
-    const handleClick=()=>{
+
+   /* const handleClick=()=>{
         if(!clicked) {
             setPartialItems(items.length > 12 ? items.slice(0, 12) : items)
             setButtonText('View All')
@@ -40,10 +40,10 @@ export const ProductsDisplayContainer=(props)=>{
             setHref('http://localhost:3000/view-all')
 
         }
-    }
-    const quickView=<QuickViewContainer properties={props.properties} type='quick-view'/>
+    }*/
+    //const quickView=<QuickViewContainer properties={props.properties} type='quick-view'/>
 
 
 
-    return <ProductsDisplay items={partialItems} handleClick={handleClick} buttonText={buttonText} href={href}/>
+    return <ProductsDisplay items={items} handleClick={()=>{}} buttonText={'buttonText'}/>
 }

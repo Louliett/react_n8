@@ -4,10 +4,9 @@ import {Loading} from "./loading";
 
 
 export const QuickView = (props) => {
-    console.log(props,'quick-view should not run')
     const selectClass=()=>{
         if(props.showView){
-            return 'quick-view '+props.properties.open
+            return 'quick-view '+props.showView
         }else{
             return 'quick-view'
         }
