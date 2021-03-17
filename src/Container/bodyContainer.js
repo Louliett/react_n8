@@ -6,7 +6,6 @@ import {SeveralDivsContainer} from "./severalDivsContainer";
 import {ViewAllContainer} from "./viewAllContainer";
 import {FullViewContainer} from "./fullViewContainer";
 import {QuickViewContainer} from "./quickViewContainer";
-import {VinContainer} from "./vinContainer";
 //contains routes for other containers as well
 
 export const BodyContainer=(props)=>{
@@ -25,9 +24,6 @@ export const BodyContainer=(props)=>{
                 </Route>
                 <Route path="/product">
                     <QuickViewContainer properties={props.properties} type='full-view'/>
-                </Route>
-                <Route path="/vin">
-                    <VinContainer/>
                 </Route>
             </Switch>
     </Router>
